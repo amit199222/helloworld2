@@ -1,4 +1,4 @@
-name: Path + Matrix Workflow
+name: Path Based Matrix CI
 
 on:
   push:
