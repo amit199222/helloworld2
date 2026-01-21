@@ -1,0 +1,38 @@
+name: Path + Matrix Workflow
+
+on:
+  push:
+    paths:
+      - "src/**"
+      - "!docs/**"
+  pull_request:
+    paths:
+      - "src/**"
+      - "!docs/**"
+
+jobs:
+  matrix-test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node: [18, 20]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Print OS and Node version
+        run: |
+          echo "Operating System: ${{ matrix.os }}"
+          echo "Node.js Version: ${{ matrix.node }}"
+
+      - name: Run dummy test
+        run: echo "Running dummy tests..."
+
